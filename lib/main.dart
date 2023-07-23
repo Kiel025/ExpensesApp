@@ -38,9 +38,9 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Despesas Pessoais"),
       ),
-      body: const Column(
+      body: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             width: double.infinity,
             child: Card(
               elevation: 5,
@@ -50,8 +50,12 @@ class MyHomePage extends StatelessWidget {
               ),
             ),
           ),
-          Card(
-            child: Text("Lista de Transações"),
+          Column(
+            children: _transactions
+                .map((tr) => Card(
+                      child: Text(tr.title),
+                    ))
+                .toList(),
           ),
         ],
       ),
