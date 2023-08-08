@@ -4,15 +4,15 @@ import 'dart:math';
 import 'package:expenses/components/transaction_list.dart';
 import 'package:expenses/models/transaction.dart';
 
-void main() => runApp(ExpensesApp());
+void main() => runApp(const ExpensesApp());
 
 class ExpensesApp extends StatelessWidget {
-  ExpensesApp({super.key});
-
-  final theme = ThemeData();
+  const ExpensesApp({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+
     return MaterialApp(
       home: const MyHomePage(),
       theme: theme.copyWith(
@@ -21,8 +21,8 @@ class ExpensesApp extends StatelessWidget {
           secondary: Colors.amber,
         ),
         textTheme: theme.textTheme.copyWith(
-          titleLarge: const TextStyle(
-            fontFamily: 'OpenSans',
+          titleMedium: const TextStyle(
+            fontFamily: 'Rubik',
             fontSize: 18,
             fontWeight: FontWeight.bold,
             color: Colors.black,
@@ -30,7 +30,7 @@ class ExpensesApp extends StatelessWidget {
         ),
         appBarTheme: const AppBarTheme(
           titleTextStyle: TextStyle(
-            fontFamily: 'OpenSans',
+            fontFamily: 'Quicksand',
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
