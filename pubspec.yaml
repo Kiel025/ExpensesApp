@@ -85,6 +85,12 @@ flutter:
       fonts:
         - asset: assets/fonts/quicksand/Quicksand-Regular.ttf
         - asset: assets/fonts/quicksand/Quicksand-Bold.ttf
+          weight: 700    
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/montserrat/Montserrat-Regular.ttf
+        - asset: assets/fonts/montserrat/Montserrat-Light.ttf
+        - asset: assets/fonts/montserrat/Montserrat-Bold.ttf
           weight: 700
   #   - family: Trajan Pro
   #     fonts:
