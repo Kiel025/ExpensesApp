@@ -26,21 +26,11 @@ class Chart extends StatelessWidget {
         }
       }
 
-      // final totalSum = recentTransactions
-      //     .where((element) =>
-      //         element.date.day == weekDay.day &&
-      //         element.date.month == weekDay.month &&
-      //         element.date.year == weekDay.year)
-      //     .map((e) => e.value)
-      //     .toList();
-      // .reduce((value, [element = 0]) => value + element)
-      // .toDouble();
-
       return {
         'day': DateFormat.E().format(weekDay)[0],
         'value': totalSum,
       };
-    });
+    }).reversed.toList();
   }
 
   double get _weekTotalValue {
