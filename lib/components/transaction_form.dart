@@ -44,64 +44,67 @@ class _TransactionFormState extends State<TransactionForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          children: [
-            TextField(
-              onSubmitted: (_) => _submitForm(),
-              controller: _titleControler,
-              decoration: const InputDecoration(
-                labelText: 'Título',
-              ),
-            ),
-            TextField(
-              onSubmitted: (_) => _submitForm(),
-              keyboardType:
-                  const TextInputType.numberWithOptions(decimal: true),
-              controller: _valueControler,
-              decoration: const InputDecoration(
-                labelText: 'Valor (R\$)',
-              ),
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    'Data: ${DateFormat('d MMM y').format(_selectedDate)}',
-                  ),
+    return SingleChildScrollView(
+      child: Card(
+        elevation: 5,
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(
+              10, 10, 10, 10 + MediaQuery.of(context).viewInsets.bottom),
+          child: Column(
+            children: [
+              TextField(
+                onSubmitted: (_) => _submitForm(),
+                controller: _titleControler,
+                decoration: const InputDecoration(
+                  labelText: 'Título',
                 ),
-                TextButton(
-                  onPressed: _showDatePicker,
-                  child: Text(
-                    'Selecionar data',
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.primary,
-                      fontWeight: FontWeight.bold,
+              ),
+              TextField(
+                onSubmitted: (_) => _submitForm(),
+                keyboardType:
+                    const TextInputType.numberWithOptions(decimal: true),
+                controller: _valueControler,
+                decoration: const InputDecoration(
+                  labelText: 'Valor (R\$)',
+                ),
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      'Data: ${DateFormat('d MMM y').format(_selectedDate)}',
                     ),
                   ),
-                )
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                ElevatedButton(
-                  onPressed: _submitForm,
-                  style: ElevatedButton.styleFrom(
-                    textStyle: TextStyle(
-                      color: Theme.of(context).textTheme.labelSmall?.color,
-                      fontWeight:
-                          Theme.of(context).textTheme.labelSmall?.fontWeight,
+                  TextButton(
+                    onPressed: _showDatePicker,
+                    child: Text(
+                      'Selecionar data',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
+                  )
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  ElevatedButton(
+                    onPressed: _submitForm,
+                    style: ElevatedButton.styleFrom(
+                      textStyle: TextStyle(
+                        color: Theme.of(context).textTheme.labelSmall?.color,
+                        fontWeight:
+                            Theme.of(context).textTheme.labelSmall?.fontWeight,
+                      ),
+                    ),
+                    child: const Text('Nova transação'),
                   ),
-                  child: const Text('Nova transação'),
-                ),
-              ],
-            )
-          ],
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
