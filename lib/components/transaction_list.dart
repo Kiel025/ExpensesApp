@@ -1,6 +1,5 @@
 import 'package:expenses/models/transaction.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
 
 class TransactionList extends StatelessWidget {
@@ -64,11 +63,25 @@ class TransactionList extends StatelessWidget {
                   subtitle: Text(
                     DateFormat('d MMM y').format(tr.date),
                   ),
-                  trailing: IconButton(
-                    icon: const Icon(Icons.delete),
-                    color: Theme.of(context).colorScheme.error,
-                    onPressed: () => onDelete(tr.id),
-                  ),
+                  trailing: MediaQuery.of(context).size.width > 400
+                      ? TextButton.icon(
+                          onPressed: () => onDelete(tr.id),
+                          icon: Icon(
+                            Icons.delete,
+                            color: Theme.of(context).colorScheme.error,
+                          ),
+                          label: Text(
+                            "Excluir transação",
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.error,
+                            ),
+                          ),
+                        )
+                      : IconButton(
+                          icon: const Icon(Icons.delete),
+                          color: Theme.of(context).colorScheme.error,
+                          onPressed: () => onDelete(tr.id),
+                        ),
                 ),
               );
             },

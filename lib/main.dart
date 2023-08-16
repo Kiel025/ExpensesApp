@@ -96,13 +96,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    bool _isLandscape =
-        MediaQuery.of(context).orientation == Orientation.landscape;
+    final mediaQuery = MediaQuery.of(context);
+
+    bool isLandscape = mediaQuery.orientation == Orientation.landscape;
 
     final appBar = AppBar(
       title: const Text("Despesas Pessoais"),
       actions: [
-        if (_isLandscape)
+        if (isLandscape)
           IconButton(
             onPressed: () {
               setState(() {
@@ -118,9 +119,9 @@ class _MyHomePageState extends State<MyHomePage> {
       ],
     );
 
-    final availableHeigh = MediaQuery.of(context).size.height -
+    final availableHeigh = mediaQuery.size.height -
         appBar.preferredSize.height -
-        MediaQuery.of(context).padding.top;
+        mediaQuery.padding.top;
 
     return Scaffold(
       appBar: appBar,
@@ -128,14 +129,14 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            if (_showChart || !_isLandscape)
+            if (_showChart || !isLandscape)
               SizedBox(
-                height: availableHeigh * (_isLandscape ? 0.7 : 0.25),
+                height: availableHeigh * (isLandscape ? 0.7 : 0.25),
                 child: Chart(_recentTransactions),
               ),
-            if (!_showChart || !_isLandscape)
+            if (!_showChart || !isLandscape)
               SizedBox(
-                height: availableHeigh * 0.75,
+                height: availableHeigh * (isLandscape ? 1 : 0.75),
                 child: TransactionList(_transactions, _deleteTransaction),
               ),
           ],
