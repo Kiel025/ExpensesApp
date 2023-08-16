@@ -55,6 +55,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _transactions = [];
 
+  bool _showChart = false;
+
   List<Transaction> get _recentTransactions {
     return _transactions
         .where((element) => element.date
@@ -94,9 +96,21 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    bool _isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
+
     final appBar = AppBar(
       title: const Text("Despesas Pessoais"),
       actions: [
+        if (_isLandscape)
+          IconButton(
+            onPressed: () {
+              setState(() {
+                _showChart = !_showChart;
+              });
+            },
+            icon: Icon(_showChart ? Icons.list : Icons.show_chart),
+          ),
         IconButton(
           onPressed: () => _openTransactionFormModal(context),
           icon: const Icon(Icons.add),
@@ -112,15 +126,18 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: appBar,
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            SizedBox(
-              height: availableHeigh * 0.25,
-              child: Chart(_recentTransactions),
-            ),
-            SizedBox(
-              height: availableHeigh * 0.75,
-              child: TransactionList(_transactions, _deleteTransaction),
-            ),
+            if (_showChart || !_isLandscape)
+              SizedBox(
+                height: availableHeigh * (_isLandscape ? 0.7 : 0.25),
+                child: Chart(_recentTransactions),
+              ),
+            if (!_showChart || !_isLandscape)
+              SizedBox(
+                height: availableHeigh * 0.75,
+                child: TransactionList(_transactions, _deleteTransaction),
+              ),
           ],
         ),
       ),
